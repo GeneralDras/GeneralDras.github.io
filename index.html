@@ -62,13 +62,13 @@
             }
             else
             {
-                array.forEach((i) =>
+                for ((let i = 0; i < array.length; i++)
                 {
-                    if (i == searchString)
+                    if (array[i] == searchString)
                     {
                         return true;
                     }
-                });
+                }
                 return false;
             }
         }
