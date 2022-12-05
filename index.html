@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -10,7 +10,7 @@
         <form id="form">
             <label for="TeamCount">
                 <input type="number" min="1" max="6" value="6" id="TeamCount" required>
-                <button type="button" onclick="generateTeamForCount();" name="Generate!">
+                <button type="button" onclick="generateTeamForCount();">Generate!</button>
         </form>
     </div>
 
@@ -27,8 +27,12 @@
             if (teamCount >= 1 && teamCount <= 6) {
 
                 for (let i = 0; i < teamCount; i++) {
-                    team.push(pokemonGen9FullyEvolved[generateRandomInt(0, 64)]);
-                    console.log(team[i]);
+                    let newMon;
+                    do {
+                        newMon = pokemonGen9FullyEvolved[generateRandomInt(0, 64)];
+                    } while (arrayContains(team, newMon));
+                    
+                    team.push(newMon);
                 }
                 document.getElementById("form").innerHTML = "";
                 showUserTeam()
@@ -49,6 +53,24 @@
         function formatStringForImage(pokemonName)
         {
             return pokemonName.replaceAll(" ", "-").toLowerCase();
+        }
+        function arrayContains(array, searchString)
+        {
+            if (array.length == 0)
+            {
+                return false;
+            }
+            else
+            {
+                array.forEach((i) =>
+                {
+                    if (i == searchString)
+                    {
+                        return true;
+                    }
+                });
+                return false;
+            }
         }
 
 
