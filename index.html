@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title>Pokemon Randomiser</title>
+</head>
+<body>
+    <div id="teamMons">
+        <form id="form">
+            <label for="TeamCount">
+                <input type="number" min="1" max="6" value="6" id="TeamCount" required>
+                <button type="button" onclick="generateTeamForCount();" value="Generate!">
+        </form>
+    </div>
+
+
+    <script type="text/javascript">
+        const pokemonGen9FullyEvolved = ["Meowscarada", "Skeledirge", "Quaquaval", "Oinkologne", "Dudunsparce", "Spidops", "Lokix", "Rabsca", "Houndstone", "Espathra", "Farigiraf", "Wugtrio", "Dondozo", "Veluza", "Palafin", "Arboliva", "Scovillain", "Bellibolt", "Revavroom", "Orthworm", "Maushold", "Cetitan", "Baxcalibur", "Tatsugiri", "Cyclizar", "Pawmot", "Kilowattrel", "Bombirdier", "Squawkabilly", "Flamigo", "Garganacl", "Glimmora", "Grafaiai", "Dachsbun", "Mabosstiff", "Brambleghast", "Gholdengo", "Great Tusk", "Brute Bonnet", "Sandy Shocks", "Scream Tail", "Flutter Mane", "Slither Wing", "Roaring Moon", "Iron Treads", "Iron Moth", "Iron Hands", "Iron Jugulis", "Iron Thorns", "Iron Bundle", "Iron Valiant", "Ting-Lu", "Chien-Pao", "Wo-Chien", "Chi-Yu", "Koraidon", "Miraidon", "Tinkaton", "Armarouge", "Ceruledge", "Toedscruel", "Kingambit", "Clodsire", "Annihilape", "Paldean Tauros"];
+        var team = [];
+
+        function generateRandomInt(min, max) {
+            return Math.floor(Math.random() * max) + min;
+        }
+        function generateTeamForCount() {
+            let teamCount = document.getElementById("TeamCount").value;
+            if (teamCount >= 1 && teamCount <= 6) {
+
+                for (let i = 0; i < teamCount; i++) {
+                    team.push(pokemonGen9FullyEvolved[generateRandomInt(0, 64)]);
+                    console.log(team[i]);
+                }
+                document.getElementById("form").innerHTML = "";
+                showUserTeam()
+            }
+            else {
+                window.alert("Please enter a number between 1 and 6");
+            }
+        }
+        function showUserTeam() {
+            let teamString = "";
+            for (let i = 0; i < team.length; i++)
+            {
+                teamString += `${((i == 3) ? "<br>" : "")}<div style="display:inline-block"><image src='https://img.pokemondb.net/sprites/scarlet-violet/normal/${formatStringForImage(team[i])}.png'><br>${team[i]}</div>` ;
+            }
+            
+            document.getElementById("teamMons").innerHTML = teamString;
+        }
+        function formatStringForImage(pokemonName)
+        {
+            return pokemonName.replaceAll(" ", "-").toLowerCase();
+        }
+
+
+    </script>
+</body>
+</html> 
