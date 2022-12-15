@@ -9,27 +9,108 @@
     <div id="teamMons">
         <form id="form">
             <label for="TeamCount">
+                <input type="checkbox" id="gen1" name="Generations" value="Gen 1" checked>
+                <label for="gen1"> Generation 1</label>
+                <input type="checkbox" id="gen2" name="Generations" value="Gen 2" checked>
+                <label for="gen2"> Generation 2</label>
+                <input type="checkbox" id="gen3" name="Generations" value="Gen 3" checked>
+                <label for="gen3"> Generation 3</label><br>
+                <input type="checkbox" id="gen4" name="Generations" value="Gen 4" checked>
+                <label for="gen4"> Generation 4</label>
+                <input type="checkbox" id="gen5" name="Generations" value="Gen 5" checked>
+                <label for="gen5"> Generation 5</label>
+                <input type="checkbox" id="gen6" name="Generations" value="Gen 6" checked>
+                <label for="gen6"> Generation 6</label><br>
+                <input type="checkbox" id="gen7" name="Generations" value="Gen 7" checked>
+                <label for="gen7"> Generation 7</label>
+                <input type="checkbox" id="gen8" name="Generations" value="Gen 8" checked>
+                <label for="gen8"> Generation 8</label>
+                <input type="checkbox" id="gen9" name="Generations" value="Gen 9" checked>
+                <label for="gen9"> Generation 9</label><br>
+
+
                 <input type="number" min="1" max="6" value="6" id="TeamCount" required>
                 <button type="button" onclick="generateTeamForCount();">Generate!</button>
+            </label>
         </form>
     </div>
 
 
     <script type="text/javascript">
-        const pokemonGen9FullyEvolved = ["Meowscarada", "Skeledirge", "Quaquaval", "Oinkologne", "Dudunsparce", "Spidops", "Lokix", "Rabsca", "Houndstone", "Espathra", "Farigiraf", "Wugtrio", "Dondozo", "Veluza", "Palafin", "Arboliva", "Scovillain", "Bellibolt", "Revavroom", "Orthworm", "Maushold", "Cetitan", "Baxcalibur", "Tatsugiri", "Cyclizar", "Pawmot", "Kilowattrel", "Bombirdier", "Squawkabilly", "Flamigo", "Garganacl", "Glimmora", "Grafaiai", "Dachsbun", "Mabosstiff", "Brambleghast", "Gholdengo", "Great Tusk", "Brute Bonnet", "Sandy Shocks", "Scream Tail", "Flutter Mane", "Slither Wing", "Roaring Moon", "Iron Treads", "Iron Moth", "Iron Hands", "Iron Jugulis", "Iron Thorns", "Iron Bundle", "Iron Valiant", "Ting-Lu", "Chien-Pao", "Wo-Chien", "Chi-Yu", "Koraidon", "Miraidon", "Tinkaton", "Armarouge", "Ceruledge", "Toedscruel", "Kingambit", "Clodsire", "Annihilape", "Paldean Tauros"];
+        const pokemonList = {
+            gen1: ["Primeape", "Electrode", "Tauros", "Ditto", "Pikachu", "Raichu", "Wigglytuff", "Venomoth", "Dugtrio", "Persian", "Golduck", "Arcanine", "Slowbro", "Slowking", "Muk", "Cloyster", "Gengar", "Hypno", "Gyarados", "Vaporeon", "Jolteon", "Flareon", "Dragonite"],
+            gen2: ["Qwilfish", "Heracross", "Delibird", "Ampharos", "Azumarill", "Sudowoodo", "Jumpluff", "Sunflora", "Espeon", "Umbreon", "Forretress", "Dunsparce", "Scizor", "Houndoom", "Donphan", "Blissey", "Tyranitar"],
+            gen3: ["Masquerain", "Swalot", "Grumpig", "Whiscash", "Banette", "Luvdisc", "Pelipper", "Gardevoir", "Breloom", "Slaking", "Hariyama", "Sableye", "Medicham", "Camerupt", "Torkoal", "Cacturne", "Altaria", "Zangoose", "Seviper", "Tropius", "Glalie", "Salamence"],
+            gen4: ["Kricketune", "Floatzel", "Gastrodon", "Skuntank", "Spiritomb", "Garchomp", "Staraptor", "Luxray", "Vespiquen", "Pachirisu", "Drifblim", "Mismagius", "Honchkrow", "Bronzong", "Lucario", "Hippowdon", "Toxicroak", "Lumineon", "Abomasnow", "Magnezone", "Weavile", "Leafeon", "Glaceon", "Gallade", "Froslass", "Rotom"],
+            gen5: ["Gothitelle", "Amoonguss", "Alomomola", "Haxorus", "Braviary", "Volcarona", "Lilligant", "Krookodile", "Zoroark", "Sawsbuck", "Eelektross", "Beartic", "Cryogonal", "Hydreigon"],
+            gen6: ["Dragalge", "Hawlucha", "Dedenne", "Klefki", "Avalugg", "Talonflame", "Vivillion", "Pyroar", "Florges", "Gogoat", "Clawitzer", "Sylveon", "Goodra", "Noivern"],
+            gen7: ["Gumshoos", "Crabominable", "Salazzle", "Oranguru", "Passimian", "Palossand", "Bruxish", "Oricorio", "Lycanroc", "Toxapex", "Mudsdale", "Lurantis", "Tsareena", "Komala", "Mimikyu"],
+            gen8: ["Sandaconda", "Barraskewda", "Grimmsnarl", "Falinks", "Indeedee", "DragapultGreedent", "Corviknight", "Drednaw", "Coalossal", "Flapple", "Appletun", "Toxtricity", "Polteageist", "Hatterene", "Pincurchin", "Frosmoth", "Stonjourner", "Eiscue", "Copperajah"],
+            gen9: ["Meowscarada", "Skeledirge", "Quaquaval", "Oinkologne", "Dudunsparce", "Spidops", "Lokix", "Rabsca", "Houndstone", "Espathra", "Farigiraf", "Wugtrio", "Dondozo", "Veluza", "Palafin", "Arboliva", "Scovillain", "Bellibolt", "Revavroom", "Orthworm", "Maushold", "Cetitan", "Baxcalibur", "Tatsugiri", "Cyclizar", "Pawmot", "Kilowattrel", "Bombirdier", "Squawkabilly", "Flamigo", "Garganacl", "Glimmora", "Grafaiai", "Dachsbun", "Mabosstiff", "Brambleghast", "Gholdengo", "Great Tusk", "Brute Bonnet", "Sandy Shocks", "Scream Tail", "Flutter Mane", "Slither Wing", "Roaring Moon", "Iron Treads", "Iron Moth", "Iron Hands", "Iron Jugulis", "Iron Thorns", "Iron Bundle", "Iron Valiant", "Ting-Lu", "Chien-Pao", "Wo-Chien", "Chi-Yu", "Koraidon", "Miraidon", "Tinkaton", "Armarouge", "Ceruledge", "Toedscruel", "Kingambit", "Clodsire", "Annihilape", "Paldean Tauros"]
+        };
+
         var team = [];
 
         function generateRandomInt(min, max) {
             return Math.floor(Math.random() * max) + min;
         }
+
         function generateTeamForCount() {
+            var checkboxes = document.getElementsByName("Generations"); 
+            let flag = false;
+            for (let i = 0; i < 9; i++) {
+                if (checkboxes[i].checked) {
+                    flag = true;
+                }
+                console.log(flag);
+            }
+            
+            if (!flag) {
+                window.alert("At least one generation must be enabled");
+                return;
+            }
+
+
             let teamCount = document.getElementById("TeamCount").value;
             if (teamCount >= 1 && teamCount <= 6) {
 
                 for (let i = 0; i < teamCount; i++) {
                     let newMon;
                     do {
-                        newMon = pokemonGen9FullyEvolved[generateRandomInt(0, 64)];
+                        var generation = generateRandomInt(1, 9);
+                    } while (checkboxes[generation-1].checked);
+
+                    do {
+                        switch (generation) {
+                            case 1:
+                                newMon = pokemonList.gen1[generateRandomInt(0, pokemonList.gen1.length - 1)];
+                                break;
+                            case 2:
+                                newMon = pokemonList.gen2[generateRandomInt(0, pokemonList.gen2.length - 1)];
+                                break;
+                            case 3:
+                                newMon = pokemonList.gen3[generateRandomInt(0, pokemonList.gen3.length - 1)];
+                                break;
+                            case 4:
+                                newMon = pokemonList.gen4[generateRandomInt(0, pokemonList.gen4.length - 1)];
+                                break;
+                            case 5:
+                                newMon = pokemonList.gen5[generateRandomInt(0, pokemonList.gen5.length - 1)];
+                                break;
+                            case 6:
+                                newMon = pokemonList.gen6[generateRandomInt(0, pokemonList.gen6.length - 1)];
+                                break;
+                            case 7:
+                                newMon = pokemonList.gen7[generateRandomInt(0, pokemonList.gen7.length - 1)];
+                                break;
+                            case 8:
+                                newMon = pokemonList.gen8[generateRandomInt(0, pokemonList.gen8.length - 1)];
+                                break;
+                            case 9:
+                                newMon = pokemonList.gen9[generateRandomInt(0, pokemonList.gen9.length - 1)];
+                                break;
+
+                        }
                     } while (arrayContains(team, newMon));
                     
                     team.push(newMon);
@@ -41,6 +122,7 @@
                 window.alert("Please enter a number between 1 and 6");
             }
         }
+
         function showUserTeam() {
             let teamString = "";
             for (let i = 0; i < team.length; i++)
@@ -50,22 +132,19 @@
             
             document.getElementById("teamMons").innerHTML = teamString;
         }
+
         function formatStringForImage(pokemonName)
         {
             return pokemonName.replaceAll(" ", "-").toLowerCase();
         }
-        function arrayContains(array, searchString)
-        {
-            if (array.length == 0)
-            {
+
+        function arrayContains(array, searchString) {
+            if (array.length == 0) {
                 return false;
             }
-            else
-            {
-                for (let i = 0; i < array.length; i++)
-                {
-                    if (array[i] == searchString)
-                    {
+            else {
+                for (let i = 0; i < array.length; i++) {
+                    if (array[i] == searchString) {
                         return true;
                     }
                 }
